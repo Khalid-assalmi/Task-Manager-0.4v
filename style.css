@@ -48,6 +48,9 @@ button[title="Add Task"] {
     height: 35px;
     font-size: 35px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .text {
     width: 25px;
