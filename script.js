@@ -28,7 +28,6 @@ addTaskbtn.addEventListener("click", function() {
             });
             localStorage.setItem("tasks", JSON.stringify(tasks));
             box.remove();
-            displayTasks();
         } else {
             alert("Please Fill All The Fields");
         }
@@ -41,7 +40,6 @@ addTaskbtn.addEventListener("click", function() {
 function displayTasks() {
     let tasksContainer = document.querySelector(".tasksContainer");
     for (let i = 0; i < tasks.length; i++) {
-        var index = i;
         setTimeout(() => {
             tasksContainer.innerHTML += `
             <div class="taskCard">
@@ -66,7 +64,6 @@ function deleteTask(index) {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     location.reload();
 }
-displayTasks()
 let turn = false;
 let items = [];
 for (let item = 0 ; item<4;++item) {
@@ -104,13 +101,13 @@ function menu() {
 let scrh = document.getElementById("srch");
 let searchResult = document.getElementById("searchResult");
 function search() {
-    let tasksContainer = document.querySelector(".tasksContainer");
     for (let i = 0; i < tasks.length; i++) {
-        let half = tasks[i].title.length / 2;
-        if (tasks[i].title === scrh.value.trim() && scrh.value.length >= half) {
+        if (tasks[i].title.includes(srch.value.toLowerCase().trim()) === true) {
             console.log(tasks[i].title);
             setTimeout(() => {
-                tasksContainer.innerHTML = "";
+                searchResult.innerHTML = "";
+            },1);
+            setTimeout(() => {
                 searchResult.innerHTML += `
                 <div class="taskCard">
                 <div class="task">
@@ -126,14 +123,22 @@ function search() {
                     </div>
             </div>
                 `;
-            });
-        } else if (tasks[i].title.includes(scrh.value) === false && scrh.value !== "") {
+            },50);
+        } else if (srch.value === "") {
+            location.reload();
+        } else if (tasks[i].title.includes(srch.value.toLowerCase().trim()) === false) {
             searchResult.innerHTML = `
             <h3 style="color: var(--font-color); text-align: center; margin-top: 20px;">No Tasks Found</h3>
             <p style="color: var(--font-color); text-align: center;">Check than name of the task</p>
             `;
-        } else if (scrh.value === "") {
-            location.reload();
         }
     }
 }
+let automaticeLoad = setInterval(() => {
+    if (srch.value == "") {
+        searchResult.style.display = "none";
+    } else {
+        searchResult.style.display = "flex";
+    }
+},10);
+displayTasks();
