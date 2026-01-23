@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager 0.4v</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div dir="rtl">
+
+        <div class="tasksContainer"></div>
+        <div class="searchResult" id="searchResult"></div>
+
+        <header>
+            <div class="main">
+                <h2>مدير المهام 0.4v</h2>
+                <div class="tools">
+                    <button id="addTaskBtn" title="Add Task">+</button>
+                    <div class="menu" title="menu" onclick="menu()">
+                        <div class="text" id="item1"></div>
+                        <div class="text" id="item2"></div>
+                        <div class="text" id="item3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="search">
+                <input type="search" id="srch" placeholder="البحث عن مهمة..." onkeydown="search()">
+                <button onclick="search()" >بحث</button>
+            </div>
+        </header>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

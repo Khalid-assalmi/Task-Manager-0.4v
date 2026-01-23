@@ -1,6 +1,7 @@
 * {
     cursor: default;
     font-family: Arial, sans-serif;
+    font-weight: 600;
 }
 body {
     overflow: hidden;
@@ -23,6 +24,7 @@ header {
     left: 0;
     right: 0;
     box-shadow: 0 0 6px #000;
+    height: 20vh;
 }
 :root {
     --main-color: #fff;
@@ -59,6 +61,7 @@ button[title="Add Task"] {
     margin: 2.5px 0;
     transition: 0.6s;
     transition-timing-function: reverse;
+    cursor: pointer;
 }
 #item2 {
     animation: apper 0.3s linear forwards;
@@ -158,18 +161,18 @@ button[title="Add Task"]:hover {
 }
 .tasksContainer {
     position: fixed;
-    top: 20vh;
+    top: 21vh;
     right: 0;
-    left: 1vw;
+    left: 0;
     height: 84vh;
     box-sizing: border-box;
-    padding: 2;
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 15px;
     border-radius: 15px;
     overflow-y: auto;
-    padding-top: 1vh;
+    padding-top: 3vh;
     padding-bottom: 6vh;
 }
 .langs {
@@ -182,7 +185,7 @@ button[title="Add Task"]:hover {
     flex-direction: column;
     padding-top: 12vh;
     align-items: center;
-    background-color: white;
+    background-color: var(--main-color);
     box-shadow: 0 0 10px #000;
     animation: apperMenu 0.4s linear forwards;
     height: 85.6vh;
@@ -218,7 +221,7 @@ button[title="Add Task"]:hover {
     padding: 0 3vw;
     box-sizing: border-box;
     width: 91vw;
-    height: 20vh;
+    height: auto;
     background-color: var(--header-bc);
     border-radius: 8px;
     box-shadow: 0 0 5px #000;
@@ -250,6 +253,7 @@ input[type="checkbox"] {
     background-color: var(--font-color);
     cursor: pointer;
     margin-left: -10px;
+    margin-right: -10px;
 }
 input[type="search"] {
     width: 75vw;
@@ -265,6 +269,7 @@ input[type="search"] {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: flex-end;
 }
 .btns button {
     width: 18vw;
@@ -282,13 +287,13 @@ input[type="search"] {
     background-color: var(--main-color);
     border: 1px solid var(--border-hover);
     position: fixed;
-    top: 19.4vh;
+    top: 21vh;
     right: 0;
     left: 0;
     height: 84vh;
     box-sizing: border-box;
-    padding: 2;
     display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 15px;
     border-radius: 15px;
@@ -296,4 +301,44 @@ input[type="search"] {
     padding-top: 3vh;
     padding-bottom: 6vh;
     background-color: var(--main-color);
+}
+.back {
+    position: fixed;
+    left: 20px;
+    top: 16px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.expired {
+    height: 10vh;
+    box-sizing: border-box;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    display: flex;
+    justify-content: center;
+}
+.expiredTasksContainer {
+    width: 100vw;
+    height: 88vh;
+    position: fixed;
+    top: 11vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+}
+.expiredTasksContainer .taskCard , .expiredTasksContainer button {
+    background-color: rgba(180, 0, 0, 0.2);
+}
+.expiredTasksContainer button:hover {
+    background-color: rgba(180, 0, 0, 0.1);
+}
+.Empty {
+    margin-top: 25vh;
+    font-size: 20px;
 }
