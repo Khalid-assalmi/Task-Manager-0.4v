@@ -359,27 +359,29 @@ input[type="search"] {
     align-items: center;
     box-sizing: border-box;
     border-radius: 16px;
-    height: 155px;
-    width: 320px;
+    height: 230px;
+    width: 420px;
     animation: apper 0.2s linear forwards;
     color: var(--font-color);
-    padding: 40px 14px;
+    padding: 65px 14px;
+    font-size: 20px;
 }
 .confirmBtns {
-    width: 100%;
+    width: 92%;
     display: flex;
     gap: 6px;
     justify-content: flex-end;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 .confirmBtns button {
     background-color: rgb(46, 111, 231);
     color: #fff;
     border: none;
-    width: 57px;
-    height: 26px;
+    width: 76px;
+    height: 32px;
     border-radius: 8px;
     cursor: pointer;
+    font-size: 18px;
 }
 .confirmBox button:hover {
     border: 0.01rem solid var(--font-color);
