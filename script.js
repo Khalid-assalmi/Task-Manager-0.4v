@@ -58,7 +58,7 @@ function displayTasks() {
                         <p>Date: ${tasks[i].date}</p>
                     </div>
                     <div class="btns">
-                        <input type="checkbox" onclick="Success(${i})" class="completeTask"/>
+                        <input type="checkbox" onclick="Success(${i})" id="item${i.toString()}"/>
                         <button class="deleteBtn" title="Edit Task" onclick="editTask(${i})">Edit Task</button>
                         <button class="deleteBtn" title="Delete Task" onclick="deleteTask(${i})">Delete Task</button>
                     </div>
@@ -70,7 +70,7 @@ function displayTasks() {
 }
 function deleteTask(index) {
     confirmBox.innerHTML = `
-        <div class="Send">Are you sure for delete the task ?</div>
+        <div class="Send">Are you sure about deleting the task ?</div>
         <div class="confirmBtns">
             <button id="no">No</button>
             <button id="yes">Yes</button>
@@ -167,12 +167,14 @@ function deleteExpiredTask(index) {
     localStorage.setItem("state", JSON.stringify(state));
     location.reload();
 }
+let random = Math.floor(Math.random()*101);
 function Success(index) {
-    let check = document.querySelector(".completeTask");
-    let check2 = document.querySelector(".completeTask2");
-    if (check.checked || check2.checked) {
+    let item = document.getElementById("item" + index);
+    let searchIndex = index * random;
+    let item2 = document.getElementById("item" + searchIndex);
+    if (item.checked || item2.checked) {
         confirmBox.innerHTML = `
-            <div class="Send">Are you sure for doing the task ?</div>
+            <div class="Send">Are you sure about doing the task ?</div>
             <div class="confirmBtns">
                 <button id="no">No</button>
                 <button id="yes">Yes</button>
@@ -182,11 +184,11 @@ function Success(index) {
         let yes = document.getElementById("yes");
         yes.onclick = function() {
             confirmBox.remove();
-            success[index] = {
+            success.push({
                 title: tasks[index].title,
                 time: tasks[index].time,
                 date: tasks[index].date
-            }
+            });
             tasks.splice(index, 1);
             localStorage.setItem("success", JSON.stringify(success));
             localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -195,8 +197,8 @@ function Success(index) {
         let no = document.getElementById("no");
         no.onclick = function() {
             confirmBox.remove();
-            check.checked = false;
-            check2.checked = false;
+            item.checked = false;
+            item2.checked = false;
         }
     }
 }
@@ -253,6 +255,7 @@ let searchResult = document.getElementById("searchResult");
 function search() {
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].title.includes(srch.value.toLowerCase().trim()) === true) {
+            let index = i * random;
             setTimeout(() => {
                 searchResult.innerHTML = "";
             },1);
@@ -265,7 +268,7 @@ function search() {
                         <p>Date: ${tasks[i].date}</p>
                     </div>
                     <div class="btns">
-                        <input type="checkbox" onclick="Success(${i})" class="completeTask2"/>
+                        <input type="checkbox" onclick="Success(${i})" id="item${index.toString()}"/>
                         <button class="deleteBtn" title="Edit Task" onclick="editTask(${i})">Edit Task</button>
                         <button class="deleteBtn" title="Delete Task" onclick="deleteTask(${i})">Delete Task</button>
                     </div>
@@ -302,7 +305,7 @@ function checkthanTimeAndDate() {
     let day = now.getDate().toString().padStart(2, "0");
     let dayOfTask = `${y}-${mo}-${day}`
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].time == timeOftask && tasks[i].date == dayOfTask.toString() || tasks[i].date >= dayOfTask.toString()) {
+        if (tasks[i].time == timeOftask && tasks[i].date == dayOfTask.toString() || tasks[i].time >= timeOftask && tasks[i].date > dayOfTask.toString() || tasks[i].time < timeOftask && tasks[i].date > dayOfTask.toString() || tasks[i].time > timeOftask && tasks[i].date == dayOfTask.toString()) {
             alert("The Time for ("+tasks[i].title + ") task is over.");
             state.push({
                 title: tasks[i].title,
