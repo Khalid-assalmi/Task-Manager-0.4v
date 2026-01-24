@@ -360,7 +360,7 @@ input[type="search"] {
     box-sizing: border-box;
     border-radius: 16px;
     height: 190px;
-    width: 380px;
+    width: 80vw;
     animation: apper 0.2s linear forwards;
     color: var(--font-color);
     padding: 45px 14px;
