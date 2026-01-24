@@ -359,11 +359,11 @@ input[type="search"] {
     align-items: center;
     box-sizing: border-box;
     border-radius: 16px;
-    height: 190px;
-    width: 80vw;
+    height: 33vh;
+    width: 83vw;
     animation: apper 0.2s linear forwards;
     color: var(--font-color);
-    padding: 45px 14px;
+    padding: 8vh 2vw;
     font-size: 19px;
 }
 .confirmBtns {
@@ -371,13 +371,13 @@ input[type="search"] {
     display: flex;
     gap: 6px;
     justify-content: flex-end;
-    margin-top: 75px;
+    margin-top: 13vh;
 }
 .confirmBtns button {
     background-color: rgb(46, 111, 231);
     color: #fff;
     border: none;
-    width: 74px;
+    width: 15vw;
     height: 30px;
     border-radius: 8px;
     cursor: pointer;
