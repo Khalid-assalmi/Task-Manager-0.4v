@@ -5,6 +5,7 @@
 }
 body {
     overflow: hidden;
+    justify-items: center;
 }
 .main {
     display: flex;
@@ -56,7 +57,7 @@ button[title="Add Task"] {
 }
 .text {
     width: 25px;
-    height: 2.7px;
+    height: 2.6px;
     background-color: var(--font-color);
     margin: 2.5px 0;
     transition: 0.6s;
@@ -173,7 +174,7 @@ button[title="Add Task"]:hover {
     border-radius: 15px;
     overflow-y: auto;
     padding-top: 3vh;
-    padding-bottom: 6vh;
+    padding-bottom: 9vh;
 }
 .langs {
     width: 100vw;
@@ -309,7 +310,7 @@ input[type="search"] {
     font-size: 20px;
     cursor: pointer;
 }
-.expired {
+.expired , .success {
     height: 10vh;
     box-sizing: border-box;
     padding-left: 5vw;
@@ -317,7 +318,7 @@ input[type="search"] {
     display: flex;
     justify-content: center;
 }
-.expiredTasksContainer {
+.expiredTasksContainer , .successTasksContainer{
     width: 100vw;
     height: 88vh;
     position: fixed;
@@ -330,7 +331,7 @@ input[type="search"] {
     overflow-y: auto;
     overflow-x: hidden;
     padding-top: 3vh;
-    padding-bottom: 3vh;
+    padding-bottom: 9vh;
 }
 .expiredTasksContainer .taskCard , .expiredTasksContainer button {
     background-color: rgba(180, 0, 0, 0.2);
@@ -338,7 +339,53 @@ input[type="search"] {
 .expiredTasksContainer button:hover {
     background-color: rgba(180, 0, 0, 0.1);
 }
+.successTasksContainer .taskCard , .successTasksContainer button {
+    background-color: rgba(30, 180, 0, 0.2);
+}
+.successTasksContainer button:hover {
+    background-color: rgba(30, 180, 0, 0.1);
+}
 .Empty {
     margin-top: 25vh;
     font-size: 20px;
+}
+.confirmBox {
+    position: fixed;
+    top: 40vh;
+    background: var(--main-color);
+    box-shadow: 0 0 8px #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 16px;
+    height: 140px;
+    width: 310px;
+    animation: apper 0.2s linear forwards;
+    color: var(--font-color);
+    padding: 30px 20px 0;
+}
+.confirmBtns {
+    width: 100%;
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+    margin-top: 45px;
+}
+.confirmBtns button {
+    background-color: rgb(46, 111, 231);
+    color: #fff;
+    border: none;
+    width: 57px;
+    height: 26px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.confirmBox button:hover {
+    border: 0.01rem solid var(--font-color);
+    background-color: rgb(15, 92, 235);
+}
+#no {
+    background-color: var(--header-bc);
+    color: var(--font-color)
 }

@@ -1,6 +1,7 @@
 let addTaskbtn = document.getElementById("addTaskBtn");
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let state = JSON.parse(localStorage.getItem("state")) || [];
+let success = JSON.parse(localStorage.getItem("success")) || [];
 if (addTaskbtn) {
     addTaskbtn.addEventListener("click", function() {
         let box = document.createElement("div");
@@ -27,7 +28,6 @@ if (addTaskbtn) {
                     title: nameValue.value,
                     time: timeValue.value,
                     date: dateValue.value,
-                    completed: false
                 });
                 localStorage.setItem("tasks", JSON.stringify(tasks));
                 box.remove();
@@ -41,31 +41,53 @@ if (addTaskbtn) {
         }
     });
 }
+let confirmBox = document.createElement("div");
+confirmBox.className = "confirmBox";
+let tasksContainer = document.querySelector(".tasksContainer");
 function displayTasks() {
-    let tasksContainer = document.querySelector(".tasksContainer");
-    for (let i = 0; i < tasks.length; i++) {
-        setTimeout(() => {
-            tasksContainer.innerHTML += `
-            <div class="taskCard">
-                <div class="task">
-                    <h3>${i+1}-&nbsp;${tasks[i].title}</h3>
-                    <p>Time: ${tasks[i].time}</p>
-                    <p>Date: ${tasks[i].date}</p>
+    if (tasks.length == 0) {
+        tasksContainer.innerHTML = `<div class="Empty">You don't have any task</div>`
+    } else {
+            for (let i = 0; i < tasks.length; i++) {
+            setTimeout(() => {
+                tasksContainer.innerHTML += `
+                <div class="taskCard">
+                    <div class="task">
+                        <h3>${i+1}-&nbsp;${tasks[i].title}</h3>
+                        <p>Time: ${tasks[i].time}</p>
+                        <p>Date: ${tasks[i].date}</p>
+                    </div>
+                    <div class="btns">
+                        <input type="checkbox" onclick="Success(${i})" class="completeTask"/>
+                        <button class="deleteBtn" title="Edit Task" onclick="editTask(${i})">Edit Task</button>
+                        <button class="deleteBtn" title="Delete Task" onclick="deleteTask(${i})">Delete Task</button>
+                    </div>
                 </div>
-                <div class="btns">
-                    <input type="checkbox" class="completeTask"/>
-                    <button class="deleteBtn" title="Edit Task" onclick="editTask(${i})">Edit Task</button>
-                    <button class="deleteBtn" title="Delete Task" onclick="deleteTask(${i})">Delete Task</button>
-                </div>
-            </div>
-            `;
-        },100);
+                `;
+            },100);
+        }
     }
 }
 function deleteTask(index) {
-    tasks.splice(index, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    location.reload();
+    confirmBox.innerHTML = `
+        <div class="Send">Are you sure for delete the task ?</div>
+        <div class="confirmBtns">
+            <button id="no">No</button>
+            <button id="yes">Yes</button>
+        </div>
+    `;
+    document.body.appendChild(confirmBox);
+    let yes = document.getElementById("yes");
+    yes.onclick = function() {
+        confirmBox.remove();
+        tasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        location.reload();
+    }
+    let no = document.getElementById("no");
+        no.onclick = function() {
+        confirmBox.remove();
+    }
 }
 function editTask(index) {
     let box = document.createElement("div");
@@ -104,7 +126,6 @@ function editTask(index) {
         box.remove();
     }
 }
-let turn = false;
 let items = [];
 for (let item = 0 ; item < 4; item++) {
     items[item] = document.getElementById("item"+item);
@@ -114,9 +135,9 @@ langs.className = "langs";
 langs.innerHTML = `
     <a href="index ar.html">العربية</a><br>
     <a href="index.html">English</a><br>
+    <a href="success.html">Success Tasks</a><br>
     <a href="expired.html">Expired Tasks</a><br>
 `;
-let expired = document.createElement("div");
 function Expired() {
     let expiredTasksContainer = document.querySelector(".expiredTasksContainer");
     if (state.length == 0) {
@@ -146,6 +167,66 @@ function deleteExpiredTask(index) {
     localStorage.setItem("state", JSON.stringify(state));
     location.reload();
 }
+function Success(index) {
+    let check = document.querySelector(".completeTask");
+    let check2 = document.querySelector(".completeTask2");
+    if (check.checked || check2.checked) {
+        confirmBox.innerHTML = `
+            <div class="Send">Are you sure for doing the task ?</div>
+            <div class="confirmBtns">
+                <button id="no">No</button>
+                <button id="yes">Yes</button>
+            </div>
+        `;
+        document.body.appendChild(confirmBox);
+        let yes = document.getElementById("yes");
+        yes.onclick = function() {
+            confirmBox.remove();
+            success[index] = {
+                title: tasks[index].title,
+                time: tasks[index].time,
+                date: tasks[index].date
+            }
+            tasks.splice(index, 1);
+            localStorage.setItem("success", JSON.stringify(success));
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            location.reload();
+        }
+        let no = document.getElementById("no");
+        no.onclick = function() {
+            confirmBox.remove();
+            check.checked = false;
+            check2.checked = false;
+        }
+    }
+}
+function SuccessTask() {
+    let successTasksContainer = document.querySelector(".successTasksContainer");
+    if (success.length == 0) {
+        successTasksContainer.innerHTML = `<div class="Empty">You don't have any success tasks</div>`;
+    } else {
+        for (let i = 0; i < success.length; i++) {
+            successTasksContainer.innerHTML += `
+            <div class="taskCard">
+                <div class="task">
+                    <h3>${i+1}-&nbsp;${success[i].title}</h3>
+                    <p>Time: ${success[i].time}</p>
+                    <p>Date: ${success[i].date}</p>
+                </div>
+                <div class="btns">
+                    <button class="deleteBtn" title="Delete Task" onclick="deleteSuccessTask(${i})">Delete Task</button>
+                </div>
+            </div>
+            `;
+        }
+    }
+}
+function deleteSuccessTask(index) {
+    success.splice(index , 1);
+    localStorage.setItem("success", JSON.stringify(success));
+    location.reload();
+}
+let turn = false;
 function open_menue() {
     items[1].style.transform = "rotate(45deg) translateY(5px) translateX(7px)";
     items[2].style.display = "none";
@@ -157,7 +238,6 @@ function close_menue() {
     items[2].style.display = "block";
     items[3].style.transform = "";
     langs.remove();
-    expired.remove();
 }
 function menu() {
     if (turn === false) {
@@ -185,7 +265,7 @@ function search() {
                         <p>Date: ${tasks[i].date}</p>
                     </div>
                     <div class="btns">
-                        <input type="checkbox" class="completeTask"/>
+                        <input type="checkbox" onclick="Success(${i})" class="completeTask2"/>
                         <button class="deleteBtn" title="Edit Task" onclick="editTask(${i})">Edit Task</button>
                         <button class="deleteBtn" title="Delete Task" onclick="deleteTask(${i})">Delete Task</button>
                     </div>
@@ -203,13 +283,13 @@ function search() {
     }
 }
 if (srch) {
-    var automaticeLoad = setInterval(() => {
-        if (srch.value == "") {
+    var automaticeSearch = setInterval(() => {
+        if (srch.value == "" || tasks.length == 0) {
             searchResult.style.display = "none";
         } else {
             searchResult.style.display = "flex";
         }
-    },10);
+    }, 10);
 }
 function checkthanTimeAndDate() {
     let now = new Date;
@@ -222,7 +302,7 @@ function checkthanTimeAndDate() {
     let day = now.getDate().toString().padStart(2, "0");
     let dayOfTask = `${y}-${mo}-${day}`
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].time == timeOftask && tasks[i].date == dayOfTask.toString()) {
+        if (tasks[i].time == timeOftask && tasks[i].date == dayOfTask.toString() || tasks[i].date >= dayOfTask.toString()) {
             alert("The Time for ("+tasks[i].title + ") task is over.");
             state.push({
                 title: tasks[i].title,
@@ -237,4 +317,6 @@ function checkthanTimeAndDate() {
     }
 }
 setInterval(checkthanTimeAndDate, 1000);
-displayTasks();
+if (tasksContainer) {
+    displayTasks();
+}
