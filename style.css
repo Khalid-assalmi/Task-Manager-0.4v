@@ -1,7 +1,7 @@
 * {
     cursor: default;
     font-family: Arial, sans-serif;
-    font-weight: 600;
+    font-weight: 700;
 }
 body {
     overflow: hidden;
@@ -34,6 +34,7 @@ header {
     --menue-hover: #d4d4d4;
     --border-hover: #fff;
     --box-color: #fff;
+    --button-hover: #000;
 }
 .tools {
     display: flex;
@@ -68,13 +69,15 @@ button[title="Add Task"] {
     animation: apper 0.3s linear forwards;
 }
 .menu {
+    box-sizing: border-box;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     cursor: pointer;
     margin-top: 10px;
-    padding: 5px;
-    box-sizing: border-box;
     background-color: var(--header-bc);
+    width: 36px;
     height: 36px;
     cursor: pointer;
 }
@@ -176,7 +179,7 @@ button[title="Add Task"]:hover {
     padding-top: 3vh;
     padding-bottom: 9vh;
 }
-.langs {
+.choice {
     width: 100vw;
     position: fixed;
     top: 9.6vh;
@@ -184,7 +187,7 @@ button[title="Add Task"]:hover {
     left: 0;
     display: flex;
     flex-direction: column;
-    padding-top: 12vh;
+    padding-top: 22vh;
     align-items: center;
     background-color: var(--main-color);
     box-shadow: 0 0 10px #000;
@@ -192,7 +195,7 @@ button[title="Add Task"]:hover {
     height: 85.6vh;
     border-radius: 12px;
 }
-.langs a {
+.choice a {
     width: 80vw;
     height: 7vh;
     display: flex;
@@ -206,7 +209,7 @@ button[title="Add Task"]:hover {
     box-shadow: 0 0 2px #000;
     cursor: pointer;
 }
-.langs a:hover {
+.choice a:hover {
     background-color: var(--menue-hover);
     border: 1px solid var(--border-hover);
 }
@@ -256,6 +259,9 @@ input[type="checkbox"] {
     margin-left: -10px;
     margin-right: -10px;
 }
+.search button:hover {
+    background-color: var(--button-hover);
+}
 input[type="search"] {
     width: 75vw;
     height: 5vh;
@@ -265,6 +271,9 @@ input[type="search"] {
     box-sizing: border-box;
     outline: none;
     cursor: text;
+}
+input[type="search"]:focus {
+    border: 1.8px solid rgb(7, 72, 211);
 }
 .btns {
     display: flex;
@@ -367,11 +376,15 @@ input[type="search"] {
     font-size: 19px;
 }
 .confirmBtns {
-    width: 97%;
+    width: 94%;
     display: flex;
     gap: 6px;
     justify-content: flex-end;
     margin-top: 13vh;
+}
+.confirmBtnsAr {
+    display: flex;
+    justify-content: flex-start;
 }
 .confirmBtns button {
     background-color: rgb(46, 111, 231);
@@ -389,4 +402,101 @@ input[type="search"] {
 #no {
     background-color: var(--header-bc);
     color: var(--font-color)
+}
+.alertBox {
+    position: fixed;
+    width: 75vw;
+    height: 22vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: var(--main-color);
+    box-shadow: 0 0 10px #000;
+    border-radius: 12px;
+    border: 0.15rem solid rgb(209, 13, 13);
+    animation: box 0.4s linear forwards;
+    color: rgb(209, 13, 13);
+}
+.alertExit {
+    position: fixed;
+    width: 75vw;
+    height: 22vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: var(--main-color);
+    box-shadow: 0 0 10px #000;
+    border-radius: 12px;
+    border: 0.15rem solid rgb(209, 13, 13);
+    animation: box 0.1s reverse forwards;
+    color: rgb(209, 13, 13);
+}
+@keyframes box {
+    from {
+        margin-top: -16vh;
+    }
+}
+@keyframes boxRotate {
+    0% {
+        rotate: 3deg;
+    }
+    20% {
+        rotate: -3deg;
+    }
+    40% {
+        rotate: 3deg;
+    }
+    60% {
+        rotate: -3deg;
+    }
+}
+@keyframes boxExit {
+    to {
+        margin-top: -25vh;
+    }
+}
+.taskTimeOver {
+    position: fixed;
+    top: 30vh;
+    background: var(--main-color);
+    box-shadow: 0 0 8px #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 16px;
+    height: 33vh;
+    width: 95vw;
+    animation: apper 0.2s linear forwards;
+    color: var(--font-color);
+    padding-bottom: 3vh;
+    padding-right: 2vw;
+    padding-left: 2vw;
+    font-size: 19px;
+    justify-content: flex-end;
+}
+.taskTimeOverBtns {
+    width: 97%;
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+    margin-top: 13vh;
+}
+.taskTimeOverBtnsAr {
+    justify-content: flex-start;
+}
+.taskTimeOver button {
+    background-color: rgb(46, 111, 231);
+    color: #fff;
+    border: none;
+    width: 15vw;
+    height: 30px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.taskTimeOver button:hover {
+    border: 0.01rem solid var(--font-color);
+    background-color: rgb(15, 92, 235);
 }

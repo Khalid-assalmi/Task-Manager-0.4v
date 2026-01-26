@@ -24,13 +24,13 @@ if (addTaskbtn) {//التحقق من وجود العنصر في الصفحة أ�
         box.className = "taskBox";
         box.innerHTML = `
         <button class="closeBtn">X</button>
-        <h2>Add New Task</h2>
-        <div class="inputs">
-            <input type="text" title="Task Title" id="name" placeholder="Task Title" class="taskTitle"/>
-            <input type="time" title="Set Time" id="time" placeholder="Set Time" class="taskTime"/>
-            <input type="date" title="Set Date" id="date" placeholder="Set Date" class="taskDate"/>
+        <h2>إضافة مهمة جديدة</h2>
+        <div class="inputs" dir="rtl">
+            <input type="text" title="Task Title" id="name" placeholder="عنوان المهمة" class="taskTitle"/>
+            <input type="time" title="Set Time" id="time" class="taskTime"/>
+            <input type="date" title="Set Date" id="date" class="taskDate"/>
         </div>
-        <button id="btn">Add The Task</button>
+        <button id="btn">إضافة المهمة</button>
         `;
         document.body.appendChild(box);
         let btn = document.getElementById("btn");
@@ -48,13 +48,13 @@ if (addTaskbtn) {//التحقق من وجود العنصر في الصفحة أ�
                 localStorage.setItem("tasks", JSON.stringify(tasks));
                 box.remove();
             } else if (nameValue.value.trim() == "" && nameValue.value.trim() == "" && dateValue.value.trim() == ""){
-                alertBox("Error: the inputs is null");
+                alertBox("خطأ : المدخلات فارغة");
             } else if (nameValue.value.trim() == ""){
-                alertBox("Error: the name of task is not defined");
+                alertBox("خطأ : ايم المهمة غير موجود");
             } else if (timeValue.value.trim() == ""){
-                alertBox("Error: the time of task is not defined");
+                alertBox("خطأ : وقت المهمة غير موجود");
             } else if (dateValue.value.trim() == ""){
-                alertBox("Error: the date of task is not defined");
+                alertBox("خطأ : تاريخ المهمة غير موجود");
             }
         }
         let closeBtn = box.querySelector(".closeBtn");
@@ -68,7 +68,7 @@ confirmBox.className = "confirmBox";
 let tasksContainer = document.querySelector(".tasksContainer");
 function displayTasks() {//عرض المهام
     if (tasks.length == 0) {//التأكد من وجود مهام أم لا
-        tasksContainer.innerHTML = `<div class="Empty">You don't have any task</div>`
+        tasksContainer.innerHTML = `<div class="Empty">أنت لا تملك أي مهام</div>`
     } else {
             for (let i = 0; i < tasks.length; i++) {
             setTimeout(() => {
@@ -76,13 +76,13 @@ function displayTasks() {//عرض المهام
                 <div class="taskCard">
                     <div class="task">
                         <h3>${i+1}-&nbsp;${tasks[i].title}</h3>
-                        <p>Time: ${tasks[i].time}</p>
-                        <p>Date: ${tasks[i].date}</p>
+                        <p> الوقت: ${tasks[i].time}</p>
+                        <p> التاريخ: ${tasks[i].date}</p>
                     </div>
                     <div class="btns">
                         <input type="checkbox" onclick="Success(${i})" id="item2${i}"/>
-                        <button class="deleteBtn" title="Edit Task" onclick="editTask(${i})">Edit Task</button>
-                        <button class="deleteBtn" title="Delete Task" onclick="deleteTask(${i})">Delete Task</button>
+                        <button class="deleteBtn" title="Edit Task" onclick="editTask(${i})">تعديل المهمة</button>
+                        <button class="deleteBtn" title="Delete Task" onclick="deleteTask(${i})">حذف المهمة</button>
                     </div>
                 </div>
                 `;
@@ -93,10 +93,10 @@ function displayTasks() {//عرض المهام
 function deleteTask(index) {//حذف مهمة
     //إرسال إشعار أكيد على حذف المهمة
     confirmBox.innerHTML = `
-        <div class="Send">Are you sure about deleting the task ?</div>
-        <div class="confirmBtns">
-            <button id="no">No</button>
-            <button id="yes">Yes</button>
+        <div class="Send">هل أنت متأكد من حذف المهمة ؟ </div>
+        <div class="confirmBtns confirmBtnsAr">
+            <button id="yes">نعم</button>
+            <button id="no">لا</button>
         </div>
     `;
     document.body.appendChild(confirmBox);
@@ -117,13 +117,13 @@ function editTask(index) {//تعديل مهمة
     box.className = "taskBox";
     box.innerHTML = `
     <button class="closeBtn">X</button>
-    <h2>Edit Task</h2>
+    <h2>تعديل مهمة</h2>
     <div class="inputs">
         <input type="text" title="Task Title" id="name" placeholder="Task Title" class="taskTitle"/>
         <input type="time" title="Set Time" id="time" placeholder="Set Time" class="taskTime"/>
         <input type="date" title="Set Date" id="date" placeholder="Set Date" class="taskDate"/>
     </div>
-    <button id="btn">Edit The Task</button>
+    <button id="btn">تعديل المهمة</button>
     `;
     document.body.appendChild(box);
     let btn = document.getElementById("btn");
@@ -146,13 +146,13 @@ function editTask(index) {//تعديل مهمة
                 localStorage.setItem("tasks", JSON.stringify(tasks));
             }
         } else if (nameValue.value.trim() == "" && nameValue.value.trim() == "" && dateValue.value.trim() == ""){
-            alertBox("Error: the inputs is null");
+            alertBox("خطأ : المدخلات فارغة");
         } else if (nameValue.value.trim() == ""){
-            alertBox("Error: the name of task is not defined");
+            alertBox("خطأ : اسم المهمة غير موجود");
         } else if (timeValue.value.trim() == ""){
-            alertBox("Error: the time of task is not defined");
+            alertBox("خطأ : وقت المهمة غير موجود");
         } else if (dateValue.value.trim() == ""){
-            alertBox("Error: the date of task is not defined");
+            alertBox("خطأ : تاريخ المهمة غير موجود");
         }
     }
     let closeBtn = box.querySelector(".closeBtn");
@@ -171,24 +171,24 @@ choice.className = "choice";
 choice.innerHTML = `
     <a href="index ar.html">العربية</a><br>
     <a href="index.html">English</a><br>
-    <a href="success.html">Success Tasks</a><br>
-    <a href="expired.html">Expired Tasks</a><br>
+    <a href="success ar.html">المهام الناجحة</a><br>
+    <a href="expired ar.html">المهام المنتهية الصلاحية</a><br>
 `;
 function Expired() {//عرض المهام المنتيهة الصلاحية
     let expiredTasksContainer = document.querySelector(".expiredTasksContainer");
     if (state.length == 0) {
-        expiredTasksContainer.innerHTML = `<div class="Empty">You don't have any expired tasks</div>`;
+        expiredTasksContainer.innerHTML = `<div class="Empty">أنت لا تملك أي مهام منتهية الصلاحية</div></div>`;
     } else {
         for (let i = 0; i < state.length; i++) {
             expiredTasksContainer.innerHTML += `
             <div class="taskCard">
                 <div class="task">
                     <h3>${i+1}-&nbsp;${state[i].title}</h3>
-                    <p>Time: ${state[i].time}</p>
-                    <p>Date: ${state[i].date}</p>
+                    <p> الوقت: ${state[i].time}</p>
+                    <p> التاريخ: ${state[i].date}</p>
                 </div>
                 <div class="btns">
-                    <button class="deleteBtn" title="Delete Task" onclick="deleteExpiredTask(${i})">Delete Task</button>
+                    <button class="deleteBtn" title="Delete Task" onclick="deleteExpiredTask(${i})">حذف المهمة</button>
                 </div>
             </div>
             `;
@@ -196,7 +196,7 @@ function Expired() {//عرض المهام المنتيهة الصلاحية
     }
 }
 function back() {//العودة إلى الصفحة الرئيسية
-    window.location.href = "index.html";
+    window.location.href = "index ar.html";
 }
 function deleteExpiredTask(index) {//حذف مهمة منتهية الصلاحية
     state.splice(index, 1);
@@ -209,10 +209,10 @@ function Success(index) {//إضافة المهام الناجحة إلى قسم 
     if (item.checked || item2.checked) {
         //إرسال إشعار تأكيد من القيام بالمهمة
         confirmBox.innerHTML = `
-            <div class="Send">Are you sure about doing the task ?</div>
-            <div class="confirmBtns">
-                <button id="no">No</button>
-                <button id="yes">Yes</button>
+            <div class="Send">هل أنت متأكد من فعل المهمة ؟</div>
+            <div class="confirmBtns confirmBtnsAr">
+                <button id="yes">نعم</button>
+                <button id="no">لا</button>
             </div>
         `;
         document.body.appendChild(confirmBox);
@@ -240,18 +240,18 @@ function Success(index) {//إضافة المهام الناجحة إلى قسم 
 function SuccessTask() {//عرض المهام الناجحة
     let successTasksContainer = document.querySelector(".successTasksContainer");
     if (success.length == 0) {
-        successTasksContainer.innerHTML = `<div class="Empty">You don't have any success tasks</div>`;
+        successTasksContainer.innerHTML = `<div class="Empty">أنت لا تملك أي مهم ناجحة</div>`;
     } else {
         for (let i = 0; i < success.length; i++) {
             successTasksContainer.innerHTML += `
             <div class="taskCard">
                 <div class="task">
                     <h3>${i+1}-&nbsp;${success[i].title}</h3>
-                    <p>Time: ${success[i].time}</p>
-                    <p>Date: ${success[i].date}</p>
+                    <p> الوقت: ${success[i].time}</p>
+                    <p> التاريخ: ${success[i].date}</p>
                 </div>
                 <div class="btns">
-                    <button class="deleteBtn" title="Delete Task" onclick="deleteSuccessTask(${i})">Delete Task</button>
+                    <button class="deleteBtn" title="Delete Task" onclick="deleteSuccessTask(${i})">حذف المهمة</button>
                 </div>
             </div>
             `;
@@ -289,7 +289,7 @@ menu.addEventListener("click", function() {//تحديد الدور لفتح أو
         close_menue();
         turn = false;
     }
-});
+})
 let srch = document.getElementById("srch");
 let searchResult = document.getElementById("searchResult");
 let searchButton = document.getElementById("saerchButton");
@@ -310,13 +310,13 @@ function search() {//خوارزمية البحث
                 <div class="taskCard">
                     <div class="task">
                         <h3>${i+1}-&nbsp;${tasks[i].title}</h3>
-                        <p>Time: ${tasks[i].time}</p>
-                        <p>Date: ${tasks[i].date}</p>
+                        <p> الوقت: ${tasks[i].time}</p>
+                        <p> التاريخ: ${tasks[i].date}</p>
                     </div>
                     <div class="btns">
                         <input type="checkbox" onclick="Success(${i})" id="item2${i}s"/>
-                        <button class="deleteBtn" title="Edit Task" onclick="editTask(${i})">Edit Task</button>
-                        <button class="deleteBtn" title="Delete Task" onclick="deleteTask(${i})">Delete Task</button>
+                        <button class="deleteBtn" title="Edit Task" onclick="editTask(${i})">تعديل المهمة</button>
+                        <button class="deleteBtn" title="Delete Task" onclick="deleteTask(${i})">حذف المهمة</button>
                     </div>
                 </div>
                 `;
@@ -325,8 +325,8 @@ function search() {//خوارزمية البحث
             location.reload();
         } else if (tasks[i].title.includes(srch.value.toLowerCase().trim()) === false) {//إذا لم يتم العثور على مهمة تحتوي على الكلمات التي أدخلها المستخدم اعرض رسالة خطأ
             searchResult.innerHTML = `
-            <h3 style="color: var(--font-color); text-align: center; margin-top: 20px;">No Tasks Found</h3>
-            <p style="color: var(--font-color); text-align: center;">Check than name of the task</p>
+            <h3 style="color: var(--font-color); text-align: center; margin-top: 20px;">لا توجد مهام مطابقة</h3>
+            <p style="color: var(--font-color); text-align: center;">تأكد من اسم المهمة</p>
             `;
         }
     }
@@ -350,9 +350,9 @@ function taskTimeOver(massege) {
     let alertOver = document.createElement("div");//إنشاء عنصر جديد
     alertOver.className = "taskTimeOver";
     alertOver.innerHTML = `
-    <div class="Send">${massege}</div>
-    <div class="taskTimeOverBtns">
-        <button id="OK">OK</button>
+    <div class="Send" dir="rtl">${massege}</div>
+    <div class="taskTimeOverBtns taskTimeOverBtnsAr">
+        <button id="OK">حسناً</button>
     </div>
     `;
     document.body.appendChild(alertOver);
@@ -379,7 +379,7 @@ function checkthanTimeAndDate() {
     for (let i = 0; i < tasks.length; i++) {
         //التأكد من أن وقت المهمة قد انتهى أم لا
         if (tasks[i].time <= timeOftask && tasks[i].date == dayOfTask || tasks[i].date < dayOfTask) {
-            taskTimeOver(`The Time for (( ${tasks[i].title} )) task is over.`);
+            taskTimeOver(`وقت مهمة ((${tasks[i].title})) انتهى.`);
             state.push({
                 title: tasks[i].title,
                 time: tasks[i].time,
