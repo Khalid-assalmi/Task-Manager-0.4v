@@ -327,7 +327,7 @@ input[type="search"]:focus {
     display: flex;
     justify-content: center;
 }
-.expiredTasksContainer , .successTasksContainer{
+.expiredTasksContainer , .successTasksContainer {
     width: 100vw;
     height: 88vh;
     position: fixed;
@@ -368,8 +368,8 @@ input[type="search"]:focus {
     align-items: center;
     box-sizing: border-box;
     border-radius: 16px;
-    height: 33vh;
-    width: 83vw;
+    height: 30vh;
+    width: 76vw;
     animation: apper 0.2s linear forwards;
     color: var(--font-color);
     padding: 8vh 2vw;
@@ -380,7 +380,7 @@ input[type="search"]:focus {
     display: flex;
     gap: 6px;
     justify-content: flex-end;
-    margin-top: 13vh;
+    margin-top: 10vh;
 }
 .confirmBtnsAr {
     display: flex;
@@ -390,8 +390,8 @@ input[type="search"]:focus {
     background-color: rgb(46, 111, 231);
     color: #fff;
     border: none;
-    width: 15vw;
-    height: 30px;
+    width: 16vw;
+    height: 5vh;
     border-radius: 8px;
     cursor: pointer;
 }
@@ -459,7 +459,7 @@ input[type="search"]:focus {
 }
 .taskTimeOver {
     position: fixed;
-    top: 30vh;
+    top: 35vh;
     background: var(--main-color);
     box-shadow: 0 0 8px #000;
     display: flex;
@@ -467,14 +467,14 @@ input[type="search"]:focus {
     align-items: center;
     box-sizing: border-box;
     border-radius: 16px;
-    height: 33vh;
-    width: 95vw;
+    height: 30vh;
+    width: 80vw;
     animation: apper 0.2s linear forwards;
     color: var(--font-color);
     padding-bottom: 3vh;
     padding-right: 2vw;
     padding-left: 2vw;
-    font-size: 19px;
+    font-size: 18px;
     justify-content: flex-end;
 }
 .taskTimeOverBtns {
@@ -482,7 +482,7 @@ input[type="search"]:focus {
     display: flex;
     gap: 6px;
     justify-content: flex-end;
-    margin-top: 13vh;
+    margin-top: 11vh;
 }
 .taskTimeOverBtnsAr {
     justify-content: flex-start;
@@ -491,8 +491,8 @@ input[type="search"]:focus {
     background-color: rgb(46, 111, 231);
     color: #fff;
     border: none;
-    width: 15vw;
-    height: 30px;
+    width: 16vw;
+    height: 5vh;
     border-radius: 8px;
     cursor: pointer;
 }
